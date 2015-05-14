@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.1.0'
+# ruby '2.1.0'
 
 # PostgreSQL driver
 gem 'pg'
@@ -12,8 +12,12 @@ gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'
 
 gem 'rake'
-
+gem 'pry'
 gem 'shotgun'
+
+# Fitbit gems
+gem 'fitgem' 
+gem 'yaml'
 
 group :test do
   gem 'shoulda-matchers'
