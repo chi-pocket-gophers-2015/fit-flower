@@ -16,8 +16,8 @@ gem 'pry'
 gem 'shotgun'
 
 # Fitbit gems
-gem 'fitgem' 
-gem 'yaml'
+gem 'fitgem'
+# gem 'yaml'
 
 group :test do
   gem 'shoulda-matchers'

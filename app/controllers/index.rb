@@ -1,5 +1,5 @@
 get "/" do
-
+  erb :login
 end
 
 get "/profile" do
