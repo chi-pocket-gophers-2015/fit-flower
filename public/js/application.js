@@ -20,7 +20,7 @@ $(document).ready(function() {
   $('.flower').hide();
 
   flowerPic();
-  var intervalId = window.setInterval(function(){flowerPic();}, 60000);
+  var intervalId = window.setInterval(function(){flowerPic();}, 30000);
 
   $('#logout-form').submit(function(event){
     clearInterval(intervalId);

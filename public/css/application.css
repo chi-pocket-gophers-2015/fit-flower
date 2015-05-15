@@ -11,13 +11,21 @@ img.flower {
 .stats {
   background-color: #222222;
   color: #cccccc;
-}
-
-p {
   margin-left: 10%;
 }
 
-html {
+#burned {
+  margin-left: 3%;
+}
+
+#goal {
+  margin-left: 7.5%;
+}
+
+
+html, body {
   margin: 0;
   height: 100%;
+  width: 100%;
+  position: absolute;
 }
