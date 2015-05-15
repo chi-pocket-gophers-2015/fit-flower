@@ -9,7 +9,9 @@ helpers do
     percentage = calories_burned.to_f / goal
     percentage = 1 if percentage > 1
     percentage = 0.1 if percentage < 0.1
+    puts "calories burned: #{calories_burned}, goal: #{goal}"
     id = (percentage / 0.1).to_i
+    return {id: id, goal: goal, burned: calories_burned}
   end
 
 

@@ -5,5 +5,19 @@ img.flower {
  	margin-left: auto;
  	margin-right: auto;
  	border: 10px solid #cccccc;
- 	
+
+}
+
+.stats {
+  background-color: #222222;
+  color: #cccccc;
+}
+
+p {
+  margin-left: 10%;
+}
+
+html {
+  margin: 0;
+  height: 100%;
 }

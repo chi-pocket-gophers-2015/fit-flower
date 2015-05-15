@@ -25,6 +25,8 @@ end
 
 post "/flower-logic" do
   #do flower logic
+  flower_hash = calculate_flower_id
   content_type :json
-  {flower_id: calculate_flower_id }.to_json
+  {flower_id: flower_hash[:id], goal: flower_hash[:goal],
+  burned: flower_hash[:burned] }.to_json
 end

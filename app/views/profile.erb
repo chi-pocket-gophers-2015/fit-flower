@@ -1,9 +1,15 @@
 <div class='container'>
 	<div class="body">
     <!-- pass this view an integer to determine flower picture -->
-    <img class="flower" src="/images/10.png ">
-	</div>
+    <% 10.times do |i| %>
+      <img class="flower" id="<%=i+1%>" src="/images/<%=i+1%>.png ">
+	  <% end %>
+  </div>
+
+  <br><br><br>
 
 	<div class="stats">
+    <p>Goal: <span id="goal"> </span></p>
+    <p>Calories Burned: <span id="burned"></span></p>
 	</div>
 </div>

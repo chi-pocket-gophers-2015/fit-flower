@@ -1,6 +1,4 @@
-function flowerPic {
-
-  $('.flower').hide();
+function flowerPic() {
 
   var request = $.ajax({
     method: "post",
@@ -8,17 +6,21 @@ function flowerPic {
   });
 
   request.success(function(response){
-    flowerId = response.flower_id
+    console.log(response);
+    $('.flower').hide();
+    $('#' + response.flower_id).show();
+    $('#goal').html(response.goal);
+    $('#burned').html(response.burned);
   });
-
-  $('#' + flowerId).show();
 
 }
 
 
 $(document).ready(function() {
+  $('.flower').hide();
 
-  var intervalId = window.setInterval(flowerPic, 60000);
+  flowerPic();
+  var intervalId = window.setInterval(function(){flowerPic();}, 60000);
 
   $('#logout-form').submit(function(event){
     clearInterval(intervalId);
