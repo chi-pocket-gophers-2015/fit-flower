@@ -1,10 +1,12 @@
 get "/" do
-  # pp client.activities_on_date 'today'
+
   redirect "/profile" if client
   erb :login
 end
 
 get "/profile" do
+  redirect "/" unless client
+  # pp client.activities_on_date 'today'
   erb :profile
 end
 
