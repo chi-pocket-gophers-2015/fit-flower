@@ -5,7 +5,7 @@ helpers do
     # binding.pry
 
     config = begin
-      Fitgem::Client.symbolize_keys(YAML.load(File.open("app/controllers/.fitgem.yml")))
+      Fitgem::Client.symbolize_keys(YAML.load(File.open(".fitgem.yml")))
     rescue ArgumentError => e
       puts "Could not parse YAML: #{e.message}"
       exit
