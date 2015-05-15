@@ -7,7 +7,8 @@ get "/profile" do
 end
 
 get "/callback" do
-
+  params.inspect
+  # session.inspect
 end
 
 post "/sessions" do
