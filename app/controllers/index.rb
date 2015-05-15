@@ -6,7 +6,7 @@ end
 
 get "/profile" do
   redirect "/" unless client
-  # pp client.activities_on_date 'today'
+  # pp "calories are: #{client.activities_on_date('today')["summary"]["caloriesOut"]}"
   erb :profile
 end
 
@@ -21,4 +21,10 @@ end
 delete "/sessions" do
   session.clear
   redirect '/'
+end
+
+post "/flower-logic" do
+  #do flower logic
+  content_type :json
+  {flower_id: calculate_flower_id }.to_json
 end
