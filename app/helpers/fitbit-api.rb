@@ -4,16 +4,16 @@ helpers do
     # require 'pry'
     # binding.pry
 
-    config = begin
-      Fitgem::Client.symbolize_keys(YAML.load(File.open(".fitgem.yml")))
-    rescue ArgumentError => e
-      puts "Could not parse YAML: #{e.message}"
-      exit
-    end
+    # config = begin
+    #   Fitgem::Client.symbolize_keys(YAML.load(File.open(".fitgem.yml")))
+    # rescue ArgumentError => e
+    #   puts "Could not parse YAML: #{e.message}"
+    #   exit
+    # end
 
-    client = Fitgem::Client.new(config[:oauth])
-    # store client in session for later access
-    session[:client] = client
+    # client = Fitgem::Client.new(config[:oauth])
+    # # store client in session for later access
+    # session[:client] = client
 
     # With the token and secret, we will try to use them
     # to reconstitute a usable Fitgem::Client
@@ -40,7 +40,8 @@ helpers do
 
     def authorize_user(verifier)
       begin
-        session[:access_token] = session[:client].authorize(session[:request_token].token, session[:request_token].secret, { :oauth_verifier => verifier })
+        # session[:access_token] = session[:client].authorize(session[:request_token].token, session[:request_token].secret, { :oauth_verifier => verifier })
+        session[:access_token] = client.authorize(session[:request_token].token, session[:request_token].secret, { :oauth_verifier => verifier })
       rescue Exception => e
         puts "Error: Could not authorize Fitgem::Client with supplied oauth verifier"
         exit
@@ -49,7 +50,7 @@ helpers do
       # puts 'Verifier is: '+verifier
       # puts "Token is:    "+access_token.token
       # puts "Secret is:   "+access_token.secret
-
+      session[:client]
       # user_id = session[:client].user_info['user']['encodedId']
       # puts "Current User is: "+user_id
 
@@ -61,12 +62,40 @@ helpers do
 
     # end
     # return true
-  end
+    end
 
   def client
-    session[:client]
+    # session[:client]
+    @client ||= new_client
   end
 
+  def new_client
+    config = begin
+      Fitgem::Client.symbolize_keys(YAML.load(File.open(".fitgem.yml")))
+    rescue ArgumentError => e
+      puts "Could not parse YAML: #{e.message}"
+      exit
+    end
 
+    client = Fitgem::Client.new(config[:oauth])
+    # store client in session for later access
+    # session[:request_token] = client.request_token
+
+    if session[:access_token]
+      begin
+        session[:access_token] = client.reconnect(session[:access_token].token, session[:access_token].secret)
+        return
+      rescue Exception => e
+        puts "Error: Could not reconnect Fitgem::Client due to invalid keys in .fitgem.yml"
+        exit
+      end
+    end
+    
+    return client
+  end
+
+  def logged_in?
+    !!session[:access_token]
+  end
 
 end

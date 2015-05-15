@@ -1,11 +1,12 @@
 get "/" do
 
-  redirect "/profile" if client
+  redirect "/profile" if logged_in?
   erb :login
 end
 
 get "/profile" do
-  redirect "/" unless client
+  # session.clear
+  redirect "/" unless logged_in?
   # pp "calories are: #{client.activities_on_date('today')["summary"]["caloriesOut"]}"
   erb :profile
 end
@@ -15,7 +16,8 @@ get "/callback" do
   # session.inspect
   authorize_user(params[:oauth_verifier])
   # client.inspect
-  redirect "/profile"
+  session.inspect
+  # redirect "/profile"
 end
 
 delete "/sessions" do
