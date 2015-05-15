@@ -1,9 +1,10 @@
 <nav class="navbar navbar-inverse" role="navigation">
   <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-left">
-        <li><h5 class="navbar-text" >Hi, <%= current_user.username %></h5></li>
+        <li><h5 class="navbar-text" >Hi, <%= current_user['fullName'] %></h5></li>
       </ul>
-      <form id="logout-form" class="navbar-form navbar-right">
+      <form id="logout-form" class="navbar-form navbar-right" method="post" action="/sessions">
+        <input type="hidden" name="_method" value="delete">
         <input class="btn btn-default" type="submit" value="Logout">
       </form>
   </div>
