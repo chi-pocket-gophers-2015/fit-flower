@@ -1,7 +1,29 @@
-$(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
+function flowerPic {
 
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $('.flower').hide();
+
+  var request = $.ajax({
+    method: "post",
+    url: "/flower-logic"
+  });
+
+  request.success(function(response){
+    flowerId = response.flower_id
+  });
+
+  $('#' + flowerId).show();
+
+}
+
+
+$(document).ready(function() {
+
+  var intervalId = window.setInterval(flowerPic, 60000);
+
+  $('#logout-form').submit(function(event){
+    clearInterval(intervalId);
+  });
+
+
+
 });
